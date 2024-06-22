@@ -22,11 +22,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO"
+      ],
       "package": "com.shashikumarverma.sapnaapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    
     "extra": {
       "eas": {
         "projectId": "8ea719bd-1d63-4e18-bdfe-f500b37c53f0"
@@ -41,7 +46,22 @@
       "microphonePermission": "Allow PRODUCT_NAME to access your microphone",
       "recordAudioAndroid": true
     }
+  ] ,
+  [
+    [
+      "expo-image-picker",
+      {
+        "photosPermission": "The app accesses your photos to let you share them with your friends."
+      }
+    ],
+    [
+      "expo-image-picker",
+      {
+        "photosPermission": "The app accesses your photos to let you share them with your friends."
+      }
+    ]
   ]]
+ 
    
   
 }

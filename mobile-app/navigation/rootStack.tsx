@@ -5,6 +5,7 @@ import { Profile } from '../screens/profile';
 import { JobDetails } from '../components/JobDetails';
 import Pay from '../screens/paymentScreen';
 import { Notification } from '../screens/notification';
+import ShowImage from '../screens/ShowImage';
 
 
 
@@ -15,8 +16,8 @@ function RootStack() {
     <Stack.Navigator screenOptions={{ animationEnabled: false, headerShown: false }}>
        <Stack.Screen name="Home" component={Dashboard} />
        <Stack.Screen name="Pay" component={Pay} />
+       <Stack.Screen name="ShowImage" component={ShowImage} />
        <Stack.Screen name="Notification" component={Notification} />
-       {/*  */}
       <Stack.Screen name="Signup" component={Signup} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="MainScreen" component={MainScreen} />
