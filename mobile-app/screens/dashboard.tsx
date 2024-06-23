@@ -12,11 +12,8 @@ import {
   Image,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import ProfileForm from "./upload";
-import ImagePickerExample from "./upload";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import CameraComponent from "./cameraComponent";
 import { ImageInfo } from "../context/imageProvider";
 const windowHeight = Dimensions.get("window").height;
 export const Dashboard = () => {
@@ -88,7 +85,7 @@ const navigation=useNavigation()
           alert("images uploaded successfully");
         }
         if (!response.ok) {
-          //   throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const result = await response.json();

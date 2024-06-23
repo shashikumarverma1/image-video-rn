@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useState } from "react";
 import axios from "axios";
@@ -6,7 +5,6 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   StyleSheet,
   Pressable,
   Dimensions,
@@ -24,9 +22,6 @@ export const Signup = () => {
     password: "",
   });
   const navigation: any = useNavigation();
-  const { userDetails, setUserDetails } = useContext(GlobalInfo);
-
-
   const handleSubmit = async () => {
     console.log("click");
 

@@ -21,9 +21,6 @@ export const Login = () => {
     email: "",
     password: "",
   });
-  
- 
-  
   const navigation = useNavigation();
   const handleSignIn = async () => {
     console.log(userData , "userdata")
@@ -41,8 +38,6 @@ export const Login = () => {
       console.log('Token:', token);
       AsyncStorage.setItem("token" , token)
       setUserDetails(token)
-      // Save the token in async storage or context
-      // Navigate to the next screen
      
     } catch (error) {
       console.error('Error signing in:', error);

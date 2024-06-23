@@ -14,20 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const windowWidth = Dimensions.get("window").width;
 
-export const Profile = (
-  {
-    //   bgcolor,
-    //   color,
-    //   text,
-    //   borderRadius,
-    //   bordercolor,
-    //   justify,
-    //   fn,
-    //   width,
-    //   height,
-    //   textsize
-  }
-) => {
+export const Profile = () => {
   const navigation = useNavigation();
   return (
     <ScrollView style={{ marginHorizontal: 20 }}>

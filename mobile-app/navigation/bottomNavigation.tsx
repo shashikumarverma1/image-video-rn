@@ -1,14 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-// import { Forms } from "../screens";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import DrawerNavigatiom from "./drawerNavigation";
 import { Dashboard, Login, Signup } from "../screens";
 import { useNavigation } from "@react-navigation/native";
 import RootStack from "./rootStack";
-import { JobDetails } from "../components/JobDetails";
 import { Profile } from "../screens/profile";
-
-// import RootStack from "./rootStack";
 const Tab = createBottomTabNavigator();
 function BottomTabs() {
   const navigation =useNavigation()
@@ -38,7 +33,6 @@ function BottomTabs() {
       })}
     >
       <Tab.Screen name="Home" component={RootStack} />
-      {/* <Tab.Screen name="JobDetails" component={JobDetails} /> */}
       <Tab.Screen
         name="Menu"
         component={Dashboard}
@@ -54,12 +48,6 @@ function BottomTabs() {
         <Tab.Screen
         name="Profile"
         component={Profile}
-        // listeners={() => ({
-        //   tabPress: (e) => {
-        //     e.preventDefault();
-        //     navigation.goBack();
-        //   },
-        // })}
       />
          <Tab.Screen
         name="Back"

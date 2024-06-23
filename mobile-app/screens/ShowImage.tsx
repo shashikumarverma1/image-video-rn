@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import {
-  Button,
-  Dimensions,
-  Pressable,
+  Dimensions, 
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -16,7 +14,6 @@ const windowWidth = Dimensions.get("window").width;
 import Ionicons from "@expo/vector-icons/Ionicons";
 const ShowImage = () => {
   const { images, setImages } = useContext(ImageInfo);
-  
   return (
     <ScrollView style={{  marginTop:windowHeight / 23}}>
       {images?.map((e, index) => {

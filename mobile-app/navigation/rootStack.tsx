@@ -7,8 +7,6 @@ import Pay from '../screens/paymentScreen';
 import { Notification } from '../screens/notification';
 import ShowImage from '../screens/ShowImage';
 
-
-
 const Stack = createStackNavigator();
 
 function RootStack() {
@@ -23,10 +21,6 @@ function RootStack() {
       <Stack.Screen name="MainScreen" component={MainScreen} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="JobDetails" component={JobDetails} />
-
-      
-
-      
     </Stack.Navigator>
   );
 }

@@ -1,10 +1,10 @@
 var express = require("express");
 var multer = require("multer");
 const cors = require("cors");
-var jwt = require('jsonwebtoken');
+var jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-var bodyParser = require('body-parser');
-const fs = require('fs');
+var bodyParser = require("body-parser");
+const fs = require("fs");
 var port = 3000;
 
 var app = express();
@@ -55,14 +55,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 db_connection();
 
 // APIs
-app.post("/profile-upload-single", upload.single("profile-file"), function (req, res, next) {
-  return res.send("response");
-});
+app.post(
+  "/profile-upload-single",
+  upload.single("profile-file"),
+  function (req, res, next) {
+    return res.send("response");
+  }
+);
 
-app.post("/profile-upload-multiple", upload.array("profile-files", 12), function (req, res, next) {
-  return res.send("response");
-});
-
+app.post(
+  "/profile-upload-multiple",
+  upload.array("profile-files", 12),
+  function (req, res, next) {
+    return res.send("response");
+  }
+);
 
 app.post("/signup", async (req, res) => {
   try {

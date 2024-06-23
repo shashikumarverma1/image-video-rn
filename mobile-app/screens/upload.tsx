@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Image, View, StyleSheet, Pressable, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { ScrollView } from 'react-native-gesture-handler';
+import { ImageInfo } from '../context/imageProvider';
 
 export default function ImagePickerExample() {
-  const [images, setImages] = useState([]);
-// console.log(images)
+  const {images, setImages} = useContext(ImageInfo);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
