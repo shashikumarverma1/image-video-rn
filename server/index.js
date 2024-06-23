@@ -4,11 +4,11 @@ const cors = require("cors");
 var jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");
 var bodyParser = require('body-parser');
+const fs = require('fs');
 var port = 3000;
 
 var app = express();
 const secret = "qoiuehwbhecehbc";
-const router = express.Router();
 
 // Database connection function
 const db_connection = async () => {
@@ -62,6 +62,7 @@ app.post("/profile-upload-single", upload.single("profile-file"), function (req,
 app.post("/profile-upload-multiple", upload.array("profile-files", 12), function (req, res, next) {
   return res.send("response");
 });
+
 
 app.post("/signup", async (req, res) => {
   try {

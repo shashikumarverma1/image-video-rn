@@ -1,5 +1,5 @@
 import { Camera, CameraView, useCameraPermissions } from "expo-camera";
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useState } from "react";
 import {
   Button,
@@ -17,12 +17,13 @@ import ImagePickerExample from "./upload";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import CameraComponent from "./cameraComponent";
+import { ImageInfo } from "../context/imageProvider";
 const windowHeight = Dimensions.get("window").height;
 export const Dashboard = () => {
   const [facing, setFacing] = useState("front");
   const [isRecording, setIsRecording] = useState(false);
   const [permission, requestPermission] = useCameraPermissions();
-  const [images, setImages] = useState([]);
+ const {images, setImages} = useContext(ImageInfo)
   const [video , setVideo]=useState(null)
 const navigation=useNavigation()
 
@@ -187,7 +188,7 @@ console.log(video , "video")
             <Pressable style={styles.imageContainer}>
               {images?.length > 0 &&
                 images?.map((image, index) => (
-                  <Pressable onPress={()=>navigation.navigate("ShowImage" , {uri:images})} key={index}>
+                  <Pressable onPress={()=>navigation.navigate("ShowImage")} key={index}>
                     <Image
                       source={{ uri: image.uri }}
                       style={styles.image}
