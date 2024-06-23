@@ -16,13 +16,14 @@ import ProfileForm from "./upload";
 import ImagePickerExample from "./upload";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import CameraComponent from "./cameraComponent";
 const windowHeight = Dimensions.get("window").height;
 export const Dashboard = () => {
   const [facing, setFacing] = useState("front");
   const [isRecording, setIsRecording] = useState(false);
   const [permission, requestPermission] = useCameraPermissions();
   const [images, setImages] = useState([]);
-  const [bigImage , setBigImage]=useState(null)
+  const [video , setVideo]=useState(null)
 const navigation=useNavigation()
 
   useEffect(() => {
@@ -70,7 +71,7 @@ const navigation=useNavigation()
 
       try {
         const response = await fetch(
-          "http://192.168.132.248:3000/profile-upload-multiple",
+          "http://192.168.119.248:3000/profile-upload-multiple",
           {
             method: "POST",
             body: data,
@@ -113,24 +114,27 @@ const navigation=useNavigation()
       console.log("Camera ref is not set");
     }
   };
-  const startRecording = async () => {
+  const startRecording = () => {
     if (cameraRef.current) {
       setIsRecording(true);
-      try {
-        const video = await cameraRef.current.recordAsync({
-          maxDuration: 60, // Set a max duration for the recording if needed
-        });
+      cameraRef.current.recordAsync({
+        maxDuration: 60000, // Set a max duration for the recording if needed
+      })
+      .then(video => {
         console.log("Video recorded:", video);
-      } catch (error) {
+        setVideo(video);
+      })
+      .catch(error => {
         console.log("Error recording video:", error);
-      } finally {
+      })
+      .finally(() => {
         setIsRecording(false);
-      }
+      });
     } else {
       console.log("Camera ref is not set");
     }
   };
-
+console.log(video , "video")
   const stopRecording = () => {
     if (cameraRef.current) {
       cameraRef.current.stopRecording();
@@ -183,7 +187,7 @@ const navigation=useNavigation()
             <Pressable style={styles.imageContainer}>
               {images?.length > 0 &&
                 images?.map((image, index) => (
-                  <Pressable onPress={()=>navigation.navigate("ShowImage" , {uri:images})}>
+                  <Pressable onPress={()=>navigation.navigate("ShowImage" , {uri:images})} key={index}>
                     <Image
                       source={{ uri: image.uri }}
                       style={styles.image}
@@ -195,7 +199,7 @@ const navigation=useNavigation()
           )}
         </CameraView>
       </View>
-   
+  
     </ScrollView>
   );
 };

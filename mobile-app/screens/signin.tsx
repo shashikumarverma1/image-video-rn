@@ -14,30 +14,42 @@ const windowHeight = Dimensions.get("window").height;
 import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { GlobalInfo } from "../context/userDetails";
+import axios from "axios";
 export const Login = () => {
   const { userDetails, setUserDetails } = useContext(GlobalInfo);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
-  useEffect(() => {
-    abc();
-  }, []);
-  async function abc() {
-    let email = await AsyncStorage.getItem("email");
-    let password = await AsyncStorage.getItem("password");
-    setUserData({ ...userData, email, password });
-
-  }
-  const signUpHandle = () => {
   
-    if (!userData.email || !userData.password) {
-      return;
-    }
-    navigation.navigate("Home");
-    setUserDetails(true);
-  };
+ 
+  
   const navigation = useNavigation();
+  const handleSignIn = async () => {
+    console.log(userData , "userdata")
+    try {
+      const response = await axios.post('http://192.168.119.248:3000/login', {
+        ...userData,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const { user, token } = response.data;
+      console.log('User:', user);
+      console.log('Token:', token);
+      AsyncStorage.setItem("token" , token)
+      setUserDetails(token)
+      // Save the token in async storage or context
+      // Navigate to the next screen
+     
+    } catch (error) {
+      console.error('Error signing in:', error);
+      // setError('Invalid credentials');
+    }
+  };
+  
 
   return (
     <ScrollView style={{ marginHorizontal: 20 }}>
@@ -74,7 +86,7 @@ export const Login = () => {
 
         <TextInput
           style={styles.input}
-          onChangeText={(e) => setUserData({ ...userData, email: e })}
+          onChangeText={(e) => setUserData({ ...userData, email: e.trim().toLocaleLowerCase() })}
           value={userData.email}
           placeholder="Enter your email"
         />
@@ -115,13 +127,13 @@ export const Login = () => {
               borderWidth: 1,
               borderColor: "grey",
             }}
-            onPress={() => signUpHandle()}
+            onPress={() => handleSignIn()}
           >
             <Text style={{ color: "#ffff", fontWeight: "800" }}>Signin</Text>
           </Pressable>
         </View>
        <View style={{  display:"flex" , justifyContent:"center" , flexDirection:"row" ,}}>
-       <Pressable onPress={() => setUserDetails(true)}>
+       <Pressable onPress={() => setUserDetails('12345678')}>
           <Text
             style={{
               padding: 20,

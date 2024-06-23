@@ -20,7 +20,7 @@ function BottomTabs() {
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          if (route.name === "Job") {
+          if (route.name === "Home") {
             iconName = focused ? "home" : "home-outline";
           } else if (route.name === "Back") {
             iconName = focused ? "arrow-back" : "arrow-back-outline";
@@ -37,7 +37,7 @@ function BottomTabs() {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen name="Job" component={RootStack} />
+      <Tab.Screen name="Home" component={RootStack} />
       {/* <Tab.Screen name="JobDetails" component={JobDetails} /> */}
       <Tab.Screen
         name="Menu"

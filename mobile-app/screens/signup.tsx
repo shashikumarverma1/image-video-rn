@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useState } from "react";
+import axios from "axios";
 import {
   View,
   Text,
@@ -16,50 +17,65 @@ import { GlobalInfo } from "../context/userDetails";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 export const Signup = () => {
-  const [useData, setUserData] = useState({
+  const [userData, setUserData] = useState({
     name: "",
     email: "",
     mobile: "",
     password: "",
   });
   const navigation: any = useNavigation();
-  const {userDetails, setUserDetails } = useContext(GlobalInfo)
-  const signUpHandle = async () => {
-    await AsyncStorage.setItem("name", useData.name);
-    await AsyncStorage.setItem("email", useData.email);
-    await AsyncStorage.setItem("mobile", useData.mobile);
-    await AsyncStorage.setItem("password", useData.password);
-    setUserDetails(true)
-    // navigation.navigate("Login");
-    navigation.navigate("Home")
-    return;
-    if (!useData.name) {
+  const { userDetails, setUserDetails } = useContext(GlobalInfo);
+
+
+  const handleSubmit = async () => {
+    console.log("click");
+
+    if (!userData.name) {
       alert("please add name");
       return;
     }
-    if (!useData.mobile) {
+    if (!userData.mobile) {
       alert("please add mobile");
       return;
     }
-    if (!useData.email) {
+    if (!userData.email) {
       alert("please add email");
       return;
     }
-    if (!useData.password) {
+    if (!userData.password) {
       alert("please add password");
       return;
     }
-    let name = await AsyncStorage.getItem("name");
-  
-    if (!name) {
-      await AsyncStorage.setItem("name", useData.name);
-      await AsyncStorage.setItem("email", useData.email);
-      await AsyncStorage.setItem("mobile", useData.mobile);
-      await AsyncStorage.setItem("password", useData.password);
-    } else {
-      alert("Already user please login");
+
+    try {
+      const response = await axios.post(
+        "http://192.168.119.248:3000/signup",
+        {
+          ...userData,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const result = await response.data;
+      if (result) {
+        console.log("Success:", result);
+        setUserData({
+          name: "",
+          email: "",
+          mobile: "",
+          password: "",
+        });
+        navigation.navigate("Login");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
+
   return (
     <ScrollView style={{ marginHorizontal: 20 }}>
       <View style={{ marginTop: 50 }}>
@@ -99,8 +115,8 @@ export const Signup = () => {
 
         <TextInput
           style={styles.input}
-          onChangeText={(e) => setUserData({ ...useData, name: e })}
-          value={useData.name}
+          onChangeText={(e) => setUserData({ ...userData, name: e})}
+          value={userData.name}
           placeholder="Enter your name"
         />
         <Text
@@ -117,8 +133,8 @@ export const Signup = () => {
 
         <TextInput
           style={styles.input}
-          onChangeText={(e) => setUserData({ ...useData, email: e.trim() })}
-          value={useData.email}
+          onChangeText={(e) => setUserData({ ...userData, email: e.trim().toLocaleLowerCase()  })}
+          value={userData.email}
           placeholder="Enter your email"
         />
         <Text
@@ -135,9 +151,10 @@ export const Signup = () => {
 
         <TextInput
           style={styles.input}
-          onChangeText={(e) => setUserData({ ...useData, mobile: e })}
-          value={useData.mobile}
+          onChangeText={(e) => setUserData({ ...userData, mobile: e })}
+          value={userData.mobile}
           placeholder="Enter your mobile no."
+           keyboardType = 'numeric'
         />
         <Text
           style={{
@@ -152,8 +169,8 @@ export const Signup = () => {
         </Text>
         <TextInput
           style={styles.input}
-          onChangeText={(e) => setUserData({ ...useData, password: e.trim() })}
-          value={useData.password}
+          onChangeText={(e) => setUserData({ ...userData, password: e.trim() })}
+          value={userData.password}
           secureTextEntry={true}
           placeholder="Enter your password"
         />
@@ -176,12 +193,12 @@ export const Signup = () => {
               borderWidth: 1,
               borderColor: "grey",
             }}
-            onPress={signUpHandle}
+            onPress={handleSubmit}
           >
             <Text style={{ color: "#ffff", fontWeight: "800" }}>Signup</Text>
           </Pressable>
         </View>
-       
+
         <View
           style={{
             display: "flex",

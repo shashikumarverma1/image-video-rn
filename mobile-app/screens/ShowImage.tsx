@@ -17,10 +17,10 @@ const ShowImage=({route})=>{
     return (
        <ScrollView>
         {
-            route?.params?.uri?.map((e)=>{
+            route?.params?.uri?.map((e ,index)=>{
                 console.log(e.uri)
                 return (
-                    <Image
+                    <Image key={index}
                     source={{ uri: e.uri }}
                     style={styles.bigImage}
                   
