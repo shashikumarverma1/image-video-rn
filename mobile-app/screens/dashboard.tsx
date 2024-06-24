@@ -112,24 +112,24 @@ const navigation=useNavigation()
       console.log("Camera ref is not set");
     }
   };
-  const startRecording = () => {
+  const startRecording = async () => {
     if (cameraRef.current) {
       setIsRecording(true);
-      cameraRef.current.recordAsync({
-        maxDuration: 60000, // Set a max duration for the recording if needed
-      })
-      .then(video => {
+      let options = {
+        quality: "1080p",
+        maxDuration: 60,
+        mute: false
+      };
+      try {
+        console.log("recording" , cameraRef.current)
+        const video = await cameraRef.current.recordAsync(options);
         console.log("Video recorded:", video);
         setVideo(video);
-      })
-      .catch(error => {
+      } catch (error) {
         console.log("Error recording video:", error);
-      })
-      .finally(() => {
+      } finally {
         setIsRecording(false);
-      });
-    } else {
-      console.log("Camera ref is not set");
+      }
     }
   };
 console.log(video , "video")
@@ -147,6 +147,9 @@ console.log(video , "video")
           facing={facing}
           FocusMode="on"
           ref={cameraRef}
+          recordAudioAndroid={isRecording}
+          CameraMode={isRecording ? "video" : "picture"}
+        
         >
           <View style={styles.buttonContainer}>
             <TouchableOpacity

@@ -13,6 +13,7 @@ export default function App() {
         </NavigationContainer>
       </ContextProvider>
     </ImageProvider>
+
   );
 }
 
