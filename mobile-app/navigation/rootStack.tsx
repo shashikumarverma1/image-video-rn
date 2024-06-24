@@ -12,8 +12,6 @@ function RootStack() {
     >
       <Stack.Screen name="Home" component={Dashboard} />
       <Stack.Screen name="ShowImage" component={ShowImage} />
-      <Stack.Screen name="Signup" component={Signup} />
-      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
   );
