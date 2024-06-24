@@ -44,7 +44,7 @@ export const Signup = () => {
 
     try {
       const response = await axios.post(
-        "http://192.168.119.248:3000/signup",
+        "http://192.168.71.248:3000/signup",
         {
           ...userData,
         },

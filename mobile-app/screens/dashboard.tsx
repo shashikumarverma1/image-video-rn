@@ -69,7 +69,7 @@ const navigation=useNavigation()
 
       try {
         const response = await fetch(
-          "http://192.168.119.248:3000/profile-upload-multiple",
+          "http://192.168.71.248:3000/profile-upload-multiple",
           {
             method: "POST",
             body: data,

@@ -97,19 +97,6 @@ const CustomSidebarMenu = ({ navigation }: { navigation: any }) => {
         </Pressable>
         <Pressable
           style={styles.button}
-          onPress={async() => {
-            navigation.navigate("Pay");          }}
-        >
-          <View style={{ display: "flex", flexDirection: "row" }}>
-            <Text style={styles.icon}>
-              <Ionicons name="arrow-up-circle" size={20} color="black" />
-            </Text>
-            <Text style={styles.heading}>Premium Services</Text>
-          </View>
-        </Pressable>
-       
-        <Pressable
-          style={styles.button}
           onPress={() => {
             logout()
           }}
