@@ -3046,10 +3046,10 @@ expo-av@^14.0.5:
   resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-14.0.5.tgz#754f3854b3a1e86a51ac49142623fec0ddb96a35"
   integrity sha512-lIRYUcuRLUZK7gXQYNtYoO+G8LGqbj2XJLd9/3jyv9W+uxBAI3BBmfOaSRzpDiJDksxoznAz+PgDtd785qP5DQ==
 
-expo-camera@~15.0.11:
-  version "15.0.11"
-  resolved "https://registry.npmjs.org/expo-camera/-/expo-camera-15.0.11.tgz"
-  integrity sha512-UU1YwIazDkI0MJNnoDuhUDLYTZ0BEHaW4iqFQm8ItLEEga7a6VaVUpnOuXtpChtOb046wzGAb4WdW84S+oCK1Q==
+expo-camera@~15.0.12:
+  version "15.0.12"
+  resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-15.0.12.tgz#dd38253e4214a5b7247aeb8a478bf8df85d0e15a"
+  integrity sha512-B2JBYJ4U+9Qy6sz3Ow6azj6Z6mV0y6IVzcdJvUF0yV0kN2cFTDC47ypx2AxYfS60x3bHJPmiGlBxe955eSBtlg==
   dependencies:
     invariant "^2.2.4"
 
